@@ -1,0 +1,35 @@
+<div class="container mt-S">
+    <div class="row justify-content-md-center">        
+        <p class="blue-text">Connectez vous pour acceder au differentes fonctionnalites.</p><br><br><br>
+        <div class="col-md-4" style="border: 1px solid blue; box-shadow: cadetblue;">
+            <form class="form-card" (ngSubmit)="onLoggedIn(form)" #form="ngForm">
+                <!--<div class="row justify-content-between text-left"> -->
+                    <div class="form-group"> 
+                        <label class="form-control-label px-3">Login
+                            <span class="text-danger"> *</span>
+                        </label> 
+                        <input type="text" id="login" ngModel name="login" placeholder="Entrer votre login" required> 
+                    </div>
+                    <div class="form-group"> 
+                        <label class="form-control-label px-3">Mot de passe
+                            <span class="text-danger"> *</span>
+                        </label>
+                        <input type="password" id="password" ngModel name="password" placeholder="Entrer votre mot de passe" required> 
+                    </div>
+                
+                <!-- </div> -->
+                
+                <div class="row justify-content-md-center">
+                    <div class="form-group"> 
+                        <button type="submit" [disabled]="form.invalid"  class="btn btn-success">Connexion</button>                        
+                    </div>
+                    <div class="form-group">                         
+                        <button type="reset" class="btn btn-secondary">Annuler</button> 
+                    </div>
+                </div>
+                <span class="alert alert-danger" *ngIf="errorMsg != '' ">{{errorMsg}}</span>                
+            </form>
+        </div>
+    </div>
+</div>
+    

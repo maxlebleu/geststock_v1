@@ -1,0 +1,163 @@
+<!-- <div *ngFor="let p of personnes">
+  <div> {{p.nom}}  </div>
+</div> 
+  (click)="loginPage()"
+-->
+<!-- <link href="/node_modules/font-awesome/css/font-awesome.min.css"> -->
+
+
+<div class="container" id="main-container">
+    <div class="row">
+        <div *ngFor="let p of personnes" class="col-md-6 col-xl-3">
+            <div class="card m-b-30">
+                <div class="card-body row">
+                    <div class="col-6">
+                        <a href=""><img src="/assets/res/images/avatar.png" alt="image here !!!" class="img-fluid rounded-circle w-60"></a>
+                    </div>
+                    <div class="col-6 card-title align-self-center mb-0">
+                        <h5>{{p?.nom}}</h5>
+                        <p class="m-0">Graphics Designer</p>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">{{p?.email}}</a></li>
+                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : {{p?.telephone}}</li>
+                </ul>
+                <div class="card-body">
+                    <div class="float-right btn-group btn-group-sm">
+                        <a href="#" (click)="onButtonClick('modifier', p)" class="btn btn-primary tooltips" data-placement="top" data-toggle="modal" data-original-title="Modifier"><i class="fa fa-pencil"></i> </a>              
+                        <a href="#" (click)="onButtonClick('supprimer', p)" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Supprimer"><i class="fa fa-times"></i></a>
+                    </div>
+                    <ul class="social-links list-inline mb-0">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook-f"></i></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modifierPersonne" tabindex="-1" role="dialog" aria-labelledby="modifierPersonneLabel">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modifierPersonneLabel">Modifier l'employer {{editPersonne?.nom}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"> &times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm" class="form-block my-2 my-lg-0" enctype="multipart/form-data"> <!-- #addForm="ngFor" -->
+          <input type="hidden" ngModel="{{editPersonne?.idPersonne}}" name="idPersonne">
+          <div class="form-group">
+            <label for="name">Nom</label>
+            <input type="text" ngModel="{{editPersonne?.nom}}" name="nom" class="form-control" id="name" placeholder="Nom" required>
+          </div>
+          <div class="form-group">
+            <label for="emial">Email</label>
+            <input type="email" ngModel="{{editPersonne?.email}}" name="email" class="form-control" id="email" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Telephone</label>
+            <input type="number" ngModel="{{editPersonne?.telephone}}" name="telephone" class="form-control" id="phone" placeholder="Telephone" required>
+          </div>
+          <div class="form-group">
+            <label for="photos">Photos</label> 
+            <input type="file" name="photos" class="form-control" id="photos" placeholder="Photos" required>
+          </div>          
+          <div class="form-group">
+            <label for="login">Login</label>
+            <input type="text" ngModel="{{editPersonne?.login}}" name="login" class="form-control" id="login" placeholder="Login" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" ngModel="{{editPersonne?.password}}" name="password" class="form-control" id="password" placeholder="Mot de passe" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="updatePersonneClose" class="btn btn-secondary close" data-dismiss="modal">Annuler</button>
+            <button type="button" (click)="onUpdatePersonne(editForm.value)" class="btn btn-primary">Modifier</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ajouterPersonne" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="labelAjouterPersonne" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="labelAjouterPersonne">Ajouter Employer</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"> &times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddPersonne(addForm)" class="form-block my-2 my-lg-0" enctype="multipart/form-data"> <!-- #addForm="ngFor" -->
+          <div class="form-group">
+            <label for="name">Nom</label>
+            <input type="text" ngModel name="nom" class="form-control" id="name" placeholder="Nom" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Telephone</label>
+            <input type="number" ngModel name="telephone" class="form-control" id="phone" placeholder="Telephone" required>
+          </div>
+          <div class="form-group">
+            <label for="photos">Photos</label>
+            <input type="file" name="photos" class="form-control" id="photos" placeholder="Photos" required>
+          </div>          
+          <div class="form-group">
+            <label for="login">Login</label>
+            <input type="text" ngModel name="login" class="form-control" id="login" placeholder="Login" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" ngModel name="password" class="form-control" id="password" placeholder="Mot de passe" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="addPersonneClose" class="btn btn-secondary close" data-dismiss="modal">Fermer</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Enregister</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="supprimerPersonne" tabindex="-1" role="dialog" aria-labelledby="labelSupprimerPersonne">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="labelSupprimerPersonne">Supprimer Employer</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"> &times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Etes vous sur de vouloir supprimer l'utilisateur {{deletePersonne?.nom}}?</p>
+      </div>
+      <div class="modal-footer">
+        <form #deleteForm="ngForm" >
+          <button type="button" id="deletePersonneClose" class="btn btn-secondary" data-dismiss="modal">Non</button>
+          <button type="button" (click)="onDeletePersonne(deletePersonne?.idPersonne!)" class="btn btn-primary">Oui</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="personnes?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">No Personne !!!</h4>
+    <p>No personne were found.</p>
+  </div>
+</div>

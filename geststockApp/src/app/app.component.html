@@ -1,0 +1,74 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="isAuth()">
+  <a class="navbar-brand" href="#">Gestion Utilisateurs</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navproduit" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Produits
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navproduit">
+          <a class="dropdown-item" href="#">Inventaire</a>
+          <a class="dropdown-item" href="#">Categorie</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Ajouter</a>
+        </div>
+      </li>  
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navtransaction" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Transactions
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navtransaction">
+          <a class="dropdown-item" href="#">Achats</a>
+          <a class="dropdown-item" href="#">vente</a>
+        </div>
+      </li>    
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="home">Historiques <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navusers" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Utilisateurs
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navusers">
+          <a class="dropdown-item" href="#">Employer</a>
+          <a class="dropdown-item" href="#">Clients</a>
+          <a class="dropdown-item" href="#">Fournisseurs</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="">Finances<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="">Factures<span class="sr-only">(current)</span></a>
+      </li>  
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="isAuth()">Deconnexion</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="onAddClick('ajouter')">Ajouter Utilisateur</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input (ngModelChange)="searchPersonne(key.value)" #key="ngModel" ngModel name="key" id="searchName" class="form-control mr-sm-2" type="search" placeholder="Rechercher employer" aria-label="Search">
+    </form>
+  </div>
+</nav>
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
